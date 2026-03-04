@@ -8,35 +8,30 @@ namespace bingo_console
 {
 	internal class Bingo
 	{
-		private string nev;
-		private string[,] Kartya;
-		private int[] Talalatok;
+		public string Nev { get; private set; }
+		private int[,] kartya;
+		private bool[,] jelolve;
 
-		public Bingo(string nev, string[,] kartya, int[] talalatok)
+		public Bingo(string nev, int[,] szamok)
 		{
-			this.nev = nev;
-			Kartya = kartya;
-			Talalatok = talalatok;
+			Nev = nev;
+			kartya = szamok;
+			jelolve = new bool[5, 5];
+
+			jelolve[2, 2] = true;
 		}
-
-		public string Nev { get => nev; set => nev = value; }
-		public string[,] Kartya1 { get => Kartya; set => Kartya = value; }
-		public int[] Talalatok1 { get => Talalatok; set => Talalatok = value; }
-
 		public void SorsoltSzamotJelol(int szam)
 		{
-			for (int i = 0; i < Kartya.GetLength(0); i++)
+			for (int i = 0; i < 5; i++)
 			{
-				for (int j = 0; j < Kartya.GetLength(1); j++)
+				for (int j = 0; j < 5; j++)
 				{
-					if (Kartya[i, j] == szam.ToString())
+					if (kartya[i, j] == szam)
 					{
-						Talalatok[i]++;
-						Kartya[i, j] = "X";
+						jelolve[i, j] = true;
 					}
 				}
 			}
-			Console.WriteLine($"{nev} jelölte a {szam} számot.");
 		}
 	}
 }
