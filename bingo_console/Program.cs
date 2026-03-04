@@ -23,7 +23,30 @@
 					}
 				}
 			}
+			Bingo andi = new Bingo("Andi", szamok);
 
+			Console.WriteLine("Játékosok száma: 1");
+
+			Random rnd = new Random();
+
+			List<int> huzottSzamok = new List<int>();
+
+			int huzasSorszama = 0;
+
+			while (!andi.BingoEll())
+			{
+				int szam = rnd.Next(1, 76);
+
+				if (!huzottSzamok.Contains(szam))
+				{
+					huzottSzamok.Add(szam);
+					huzasSorszama++;
+					Console.WriteLine($"{huzasSorszama}. húzás: {szam}");
+					andi.SorsoltSzamotJelol(szam);
+				}
+			}
+			Console.WriteLine($"BINGÓ! Andi nyert {huzasSorszama} húzás után!");
+			andi.KartyaKiir();
 		}
 
 	}
